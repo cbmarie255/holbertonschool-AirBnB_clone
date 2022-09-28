@@ -7,14 +7,14 @@ import uuid
 
 class BaseModel:
     """ Creates Base Model, define attributes for project """
-    ident = str(uuid.uuid4(id))
+    id = str(uuid.uuid4())
 
     def __init__(self, id=None):
         """ initializes base instance """
         if id is not None:
             self.id = id
         else:
-            self.id = BaseModel.ident
+            self.id = BaseModel.id
 
     def __init__(self, created_at=None):
         """ initializes at current date/time of creation """
