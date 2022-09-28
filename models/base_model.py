@@ -26,5 +26,21 @@ class BaseModel:
             self.updated_at = datetime.now()
 
     def __str__(self):
-        message = "[{}] ({}) {}".format(self__class, self.id, self__dict__)
+        message = "[{}] ({}) {}".format(self.__class, self.id, self.__dict__)
         return message
+
+    def save(self):
+        self.save = save
+        save = self.updated_at
+
+    def to_dict(self):
+        
+        bnb_dict = {
+            'id' = self.id,
+            'updated_at' = datetime.datetime.strptime(self.updated_at,
+                                                      '%Y-%m-%dT%H:%M:%S.%f'),
+            'created_at' = datetime.datetime.strptime(self.created_at,
+                                                      '%Y-%m-%dT%H:%M:%S.%f'),
+            '__class__' = self.__class
+            }
+        return bnb_dict
