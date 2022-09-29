@@ -7,45 +7,25 @@ import uuid
 
 class BaseModel:
     """ Creates Base Model, define attributes for project """
-    id = str(uuid.uuid4())
-
-    def __init__(self, id=None):
+    def __init__(self):
         """ initializes base instance """
-        if id is not None:
-            self.id = id
-        else:
-            self.id = BaseModel.id
-
-    def __init__(self, created_at=None):
-        """ initializes at current date/time of creation """
-        self.created_at = created_at
-        if created_at is None:
-            self.created_at = datetime.now()
-
-    def __init__(self, updated_at=None):
-        """ initializes instance when date/time is updated"""
-        self.updated_at = updated_at
-        if updated_at is None:
-            self.updated_at = datetime.now()
+        self.id = str(uuid.uuid4())
+        self.created_at = datetime.datetime.now()
+        self.updated_at = datetime.datetime.now()
 
     def __str__(self):
         """ converts to human readable string """
-        message = "[{}] ({}) {}".format(self.__class, self.id, self.__dict__)
+        message = "[{}] ({}) {}".format(self.__class__, self.id, self.__dict__)
         return message
 
     def save(self):
         """ updates public instance to current date/time """
-        self.save = save
-        save = self.updated_at
+        self.updated_at = datetime.datetime.now()
 
     def to_dict(self):
-        """ returns dictionary representation of attributes """
-        bnb_dict = {
-            'id' : self.id,
-            'updated_at' : datetime.datetime.strptime(self.updated_at,
-                                                      '%Y-%m-%dT%H:%M:%S.%f'),
-            'created_at' : datetime.datetime.strptime(self.created_at,
-                                                      '%Y-%m-%dT%H:%M:%S.%f'),
-            '__class__' : self.__class
-            }
-        return bnb_dict
+        """ returing a dictionary containing all keys/values of __dict__ """
+        dict_cpy = self.__dict__.copy()
+        dict_cpy['__class__'] = self.__class__.__name__
+        dict_cpy['created_at'] = self.created_at.isoformat()
+        dict_cpy['updated_at'] = self.updated_at.isoformat()
+        return dict_cpy
