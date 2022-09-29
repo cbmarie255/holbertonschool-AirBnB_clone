@@ -3,15 +3,25 @@
 
 import datetime
 import uuid
+timestamp = "%Y-%m-%dT%H:%M:%S.%f"
 
 
 class BaseModel:
     """ Creates Base Model, define attributes for project """
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         """ initializes base instance """
-        self.id = str(uuid.uuid4())
-        self.created_at = datetime.datetime.now()
-        self.updated_at = datetime.datetime.now()
+        if kwargs is not None:
+            for key, value in kwargs.items():
+                if key == 'created_at':
+                    self.__dict__[key] = datetime.datetime.strptime(value,
+                                                                    timestamp)
+                if key == 'updated_at':
+                    self.__dict__[key] = datetime.datetime.strptime(value,
+                                                                    timestamp)
+            else:
+                self.id = str(uuid.uuid4())
+                self.created_at = datetime.datetime.now()
+                self.updated_at = datetime.datetime.now()
 
     def __str__(self):
         """ converts to human readable string """
