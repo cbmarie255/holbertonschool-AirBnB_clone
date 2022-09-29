@@ -18,6 +18,8 @@ class BaseModel:
                 if key == 'updated_at':
                     self.__dict__[key] = datetime.datetime.strptime(value,
                                                                     timestamp)
+                if key != '__class__':
+                    setattr(self, key, kwargs[key])
             else:
                 self.id = str(uuid.uuid4())
                 self.created_at = datetime.datetime.now()
