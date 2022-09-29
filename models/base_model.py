@@ -10,7 +10,7 @@ class BaseModel:
     """ Creates Base Model, define attributes for project """
     def __init__(self, *args, **kwargs):
         """ initializes base instance """
-        if kwargs is not None:
+        if kwargs:
             for key, value in kwargs.items():
                 if key == 'created_at':
                     self.__dict__[key] = datetime.datetime.strptime(value,
@@ -20,10 +20,10 @@ class BaseModel:
                                                                     timestamp)
                 if key != '__class__':
                     setattr(self, key, kwargs[key])
-            else:
-                self.id = str(uuid.uuid4())
-                self.created_at = datetime.datetime.now()
-                self.updated_at = datetime.datetime.now()
+        else:
+            self.id = str(uuid.uuid4())
+            self.created_at = datetime.datetime.now()
+            self.updated_at = datetime.datetime.now()
 
     def __str__(self):
         """ converts to human readable string """
