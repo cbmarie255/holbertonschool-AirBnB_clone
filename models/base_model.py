@@ -3,7 +3,7 @@
 
 import datetime
 import uuid
-from models import storage
+import models
 timestamp = "%Y-%m-%dT%H:%M:%S.%f"
 
 
