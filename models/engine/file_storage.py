@@ -3,7 +3,7 @@
     Serializes & deseralizes instances to a JSON file.
 """
 import json
-import BaseModel
+from models import BaseModel
 
 class FileStorage:
     """Serializes & deseralizes instances to a JSON file"""
@@ -31,4 +31,11 @@ class FileStorage:
             return f.write(dump)
 
     def reload(self):
-
+        """will reload server data"""
+        try:
+            with open(self.__file_path, 'r', encoding="UTF8") as f:
+                obj_load = json.load(f.read())
+        except:
+            pass
+        for key, value in obj_load.items():
+            f.read()
