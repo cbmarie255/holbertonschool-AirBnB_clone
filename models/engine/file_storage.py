@@ -8,11 +8,7 @@ import json
 class FileStorage:
     """Serializes & deseralizes instances to a JSON file"""
     __file_path = 'file.json'
-    __objects = dict()
-
-    def __init__(self):
-        """Initialization"""
-        pass
+    __objects = {}
 
     def all(self):
         """ returns the dictionary __objects """
