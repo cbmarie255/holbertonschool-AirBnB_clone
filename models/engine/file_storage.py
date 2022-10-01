@@ -3,16 +3,12 @@
     Serializes & deseralizes instances to a JSON file.
 """
 import json
-from models import BaseModel
+
 
 class FileStorage:
     """Serializes & deseralizes instances to a JSON file"""
     __file_path = 'file.json'
-    __objects = dict()
-
-    def __init__(self):
-        """Initialization"""
-        pass
+    __objects = {}
 
     def all(self):
         """ returns the dictionary __objects """
@@ -37,5 +33,3 @@ class FileStorage:
                 obj_load = json.load(f.read())
         except:
             pass
-        for key, value in obj_load.items():
-            f.read()
