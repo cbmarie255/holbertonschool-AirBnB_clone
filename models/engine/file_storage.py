@@ -3,7 +3,11 @@
     Serializes & deseralizes instances to a JSON file.
 """
 import json
+<<<<<<< HEAD
 
+=======
+# from models import BaseModel
+>>>>>>> 276921f755f37dae1578b3751150d4cf07d4a4e4
 
 class FileStorage:
     """Serializes & deseralizes instances to a JSON file"""
