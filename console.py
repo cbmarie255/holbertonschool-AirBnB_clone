@@ -2,7 +2,6 @@
 """ Module Command Controller """
 
 import cmd
-import sys
 from models.base_model import BaseModel
 
 
