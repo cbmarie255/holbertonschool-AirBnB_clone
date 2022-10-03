@@ -4,6 +4,7 @@
 """
 import json
 from os import path
+import models
 from models.base_model import BaseModel
 
 class FileStorage:
