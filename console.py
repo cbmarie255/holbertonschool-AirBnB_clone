@@ -3,6 +3,8 @@
 
 import cmd
 from models.base_model import BaseModel
+from models.engine import FileStorage
+from models import storage
 
 
 class HBNBCommand(cmd.Cmd):
@@ -31,8 +33,8 @@ class HBNBCommand(cmd.Cmd):
         if len(arg) > 1:
             print("** too many arguments **")
             return False
-        if arg[0] != 'BaseModel':
-            print('** class name missing **')
+        if len(arg) == 0:
+            print("** class doesn't exist **")
             return False
         new_obj = eval(str(args) + '()')
         new_obj.save()
