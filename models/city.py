@@ -10,3 +10,7 @@ class City(BaseModel):
     """inherited class for the city"""
     state_id = ""
     name = ""
+    
+    def __init__(self):
+        """initalizing for future updates"""
+        pass
