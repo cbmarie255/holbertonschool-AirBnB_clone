@@ -23,7 +23,7 @@ class HBNBCommand(cmd.Cmd):
         """ handles an empty line by doing nothing """
         pass
 
-    def do_create(self, arg):
+    def do_create(self, args):
         """ creates new instance of Base Model, saves to JSON,
             prints id """
         if len(args) == 0:
@@ -32,14 +32,13 @@ class HBNBCommand(cmd.Cmd):
             new = valid_class[args]()
             new.save()
             print(new.id)
-            print(new.name)
         else:
             print("** class doesn't exist **")
 
-    def do_show(self, arg):
+    def do_show(self, args):
         """ prints str representation of an instance based
             on class name and id """
-        arg = args.split()
+        list_args = args.split(" ")
         if len(args) == 0:
             print("** class name missing **")
         elif list_args[0] in valid_class.keys():
@@ -55,9 +54,9 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** class doesn't exist **")
 
-    def do_destroy(self, arg):
+    def do_destroy(self, args):
         """ deletes an instance based on class name and id """
-        arg = args.split()
+        list_args = args.split(" ")
         if len(args) == 0:
             print("** class name missing **")
         elif list_args[0] in valid_class.keys():
@@ -74,7 +73,7 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** class doesn't exist **")
 
-    def do_all(self, arg):
+    def do_all(self, args):
         """ prints str representation of all instances of the object """
         if len(args) == 0:
             for key in storage.all():
@@ -87,19 +86,19 @@ class HBNBCommand(cmd.Cmd):
                 if args == key_arg[0]:
                     print([str(storage.all()[key])])
 
-    def do_update(self, arg):
+    def do_update(self, args):
         """ updates an instance based on class name and id
             by adding or updating an attribute """
-        arg = args.split()
+        list_args = args.split(" ")
         if len(args) < 1:
             print('** class name missing **')
         elif len(list_args) < 2:
             print('** instance id missing **')
-        elif len(list_arg) < 3:
+        elif len(list_args) < 3:
             print('** attribute name missing **')
-        elif len(list_arg) < 4:
+        elif len(list_args) < 4:
             print('** value missing **')
-        elif len(list_arg)[0] not in valid_class.keys():
+        elif len(list_args)[0] not in valid_class.keys():
             print("** class doesn't exist **")
         else:
             obj_search = list_args[0] + "." + list_args[1]
