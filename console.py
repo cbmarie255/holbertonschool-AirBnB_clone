@@ -3,8 +3,22 @@
 
 import cmd
 from models.base_model import BaseModel
+from models.amenity import Amenity
+from models.city import City
+from models.place import Place
+from models.review import Review
+from models.state import State
+from models.user import User
 from models.engine.file_storage import FileStorage
 from models import storage
+user_class = {"BaseModel": BaseModel,
+              "Amenity": Amenity,
+              "City": City,
+              "Place": Place,
+              "Review": Review,
+              "State": State,
+              "User": User
+              }
 
 
 class HBNBCommand(cmd.Cmd):
@@ -28,8 +42,8 @@ class HBNBCommand(cmd.Cmd):
             prints id """
         if len(args) == 0:
             print('** class name missing **')
-        elif args in valid_class.keys():
-            new = valid_class[args]()
+        elif args in user_class.keys():
+            new = user_class[args]()
             new.save()
             print(new.id)
         else:
@@ -41,7 +55,7 @@ class HBNBCommand(cmd.Cmd):
         list_args = args.split(" ")
         if len(args) == 0:
             print("** class name missing **")
-        elif list_args[0] in valid_class.keys():
+        elif list_args[0] in user_class.keys():
             if len(list_args) == 1:
                 print("** instance id missing **")
             else:
@@ -59,7 +73,7 @@ class HBNBCommand(cmd.Cmd):
         list_args = args.split(" ")
         if len(args) == 0:
             print("** class name missing **")
-        elif list_args[0] in valid_class.keys():
+        elif list_args[0] in user_class.keys():
             if len(list_args) == 1:
                 print("** instance id missing **")
             else:
@@ -78,7 +92,7 @@ class HBNBCommand(cmd.Cmd):
         if len(args) == 0:
             for key in storage.all():
                 print([str(storage.all()[key])])
-        elif args not in valid_class.keys():
+        elif args not in user_class.keys():
             print("** class doesn't exist **")
         else:
             for key, value in storage.all().items():
@@ -98,7 +112,7 @@ class HBNBCommand(cmd.Cmd):
             print('** attribute name missing **')
         elif len(list_args) < 4:
             print('** value missing **')
-        elif len(list_args)[0] not in valid_class.keys():
+        elif len(list_args)[0] not in user_class.keys():
             print("** class doesn't exist **")
         else:
             obj_search = list_args[0] + "." + list_args[1]

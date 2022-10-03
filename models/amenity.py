@@ -3,10 +3,10 @@
 """
     Amenity module
 """
-import models.base_model import BaseModel
+from models.base_model import BaseModel
 
 
-class Ameity(BaseModel):
+class Amenity(BaseModel):
     """inherited class for amenities"""
     name = ""
 
