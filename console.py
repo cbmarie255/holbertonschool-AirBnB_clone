@@ -112,7 +112,7 @@ class HBNBCommand(cmd.Cmd):
             print('** attribute name missing **')
         if len(list_args) < 4:
             print('** value missing **')
-        if len(list_args)[0] not in user_class.keys():
+        if list_args[0] not in user_class.keys():
             print("** class doesn't exist **")
         else:
             obj_search = list_args[0] + "." + list_args[1]
