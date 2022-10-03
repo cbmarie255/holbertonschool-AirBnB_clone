@@ -1,1 +1,1 @@
-{'BaseModel.d4fb3a59-a40d-461c-91f0-b387b6bc4f81': {'id': 'd4fb3a59-a40d-461c-91f0-b387b6bc4f81', 'created_at': '2022-10-03T06:05:33.438588', 'updated_at': '2022-10-03T06:05:33.438626', 'name': 'My_First_Model', 'my_number': 89, '__class__': 'BaseModel'}}
+{'User.5a670bf2-0839-42c8-abf9-98a175d4fcde': {'id': '5a670bf2-0839-42c8-abf9-98a175d4fcde', 'created_at': '2022-10-03T06:13:53.756780', 'updated_at': '2022-10-03T06:13:53.756871', 'first_name': 'John', 'email': 'airbnb2@mail.com', 'password': 'root', '__class__': 'User'}}
