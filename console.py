@@ -3,7 +3,7 @@
 
 import cmd
 from models.base_model import BaseModel
-from models.engine import FileStorage
+from models.engine.file_storage import FileStorage
 from models import storage
 
 
@@ -63,14 +63,14 @@ class HBNBCommand(cmd.Cmd):
         elif list_args[0] in valid_class.keys():
             if len(list_args) == 1:
                 print("** instance id missing **")
-        else:
-            obj_search = list_args[0] + "." + list_args[1]
-            obj_all = storage.all()
-            if obj_search in obj_all:
-                del obj_all[obj_search]
-                storage.save()
             else:
-                print("** no instance found **")
+                obj_search = list_args[0] + "." + list_args[1]
+                obj_all = storage.all()
+                if obj_search in obj_all:
+                    del obj_all[obj_search]
+                    storage.save()
+                else:
+                    print("** no instance found **")
         else:
             print("** class doesn't exist **")
 

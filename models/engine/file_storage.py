@@ -23,7 +23,7 @@ class FileStorage:
     def save(self):
         """will serialize objects to the obj with a key"""
         for key, value in self.__objects.items():
-            dumpy = str({key: value.to_dict()})
+            dumpy = json.dumps(self.__objects)
         with open(self.__file_path, 'w', encoding="UTF8") as f:
             return f.write(dumpy)
 
@@ -32,7 +32,6 @@ class FileStorage:
         if path.isfile(self.__file_path):
             with open(self.__file_path, 'r', encoding="UTF8") as f:
                 dictionary = json.load(f)
-            objs = eval(dictionary)
-            for key, value in objs.items():
+            for key, value in dictionary.items():
                 name = value['__class__']
                 self.new(eval(name)(**value))
