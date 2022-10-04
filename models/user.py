@@ -2,9 +2,8 @@
 """
     User Model, inheriting from BaseModel.
 """
-import datetime
-import uuid
 from models.base_model import BaseModel
+
 
 class User(BaseModel):
     """user model defined"""
