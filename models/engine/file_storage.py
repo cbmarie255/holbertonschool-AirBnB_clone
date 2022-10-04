@@ -3,7 +3,6 @@
     Serializes & deseralizes instances to a JSON file.
 """
 import json
-from os import path
 import models
 from models.base_model import BaseModel
 from models.user import User
@@ -12,6 +11,7 @@ from models.city import City
 from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
+
 
 class FileStorage:
     """Serializes & deseralizes instances to a JSON file"""
@@ -38,9 +38,14 @@ class FileStorage:
 
     def reload(self):
         """will reload server data"""
-        if path.isfile(self.__file_path):
+        try:
             with open(self.__file_path, 'r', encoding="UTF8") as f:
-                dictionary = json.load(f)
-            for key, value in dictionary.items():
-                name = value['__class__']
-                self.new(eval(name)(**value))
+                obj_dict = json.loads(f.read())
+                for key, value in obj_dict.items():
+                    self.__objects[key] = value.to_dict()
+                    dumpy = json.dumps(self.__objects)
+                    f.write(dumpy)
+        except FileNotFoundError:
+            pass
+        except json.decoder.JSONDecodeError:
+            pass
