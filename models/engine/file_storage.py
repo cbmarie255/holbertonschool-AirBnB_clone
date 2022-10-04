@@ -18,14 +18,20 @@ class FileStorage:
     __file_path = 'file.json'
     __objects = {}
 
+    @classmethod
+    def destroy_all(cls):
+        """ Destroys all objects """
+        for obj in cls.__objects.values():
+            obj.destroy()
+        cls.__objects = {}
+
     def all(self):
         """ returns the dictionary __objects """
         return self.__objects
 
     def new(self, obj):
-        """set in __objects the obj with key <obj class name>.id"""
-        key = str(obj.__class__.__name__) + '.' + str(obj.id)
-        self.__objects[key] = obj
+        """ set in __objects the obj with key <obj class name>.id """
+        self.__objects[f'{obj.__class__.__name__}.{obj.id}'] = obj
 
     def save(self):
         """will serialize objects to the obj with a key"""
