@@ -3,7 +3,6 @@
     Serializes & deseralizes instances to a JSON file.
 """
 import json
-from os import path
 import models
 from models.base_model import BaseModel
 from models.user import User
@@ -13,19 +12,26 @@ from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
 
+
 class FileStorage:
     """Serializes & deseralizes instances to a JSON file"""
     __file_path = 'file.json'
     __objects = {}
+
+    @classmethod
+    def destroy_all(cls):
+        """ Destroys all objects """
+        for obj in cls.__objects.values():
+            obj.destroy()
+        cls.__objects = {}
 
     def all(self):
         """ returns the dictionary __objects """
         return self.__objects
 
     def new(self, obj):
-        """set in __objects the obj with key <obj class name>.id"""
-        key = str(obj.__class__.__name__) + '.' + str(obj.id)
-        self.__objects[key] = obj
+        """ set in __objects the obj with key <obj class name>.id """
+        self.__objects[f'{obj.__class__.__name__}.{obj.id}'] = obj
 
     def save(self):
         """will serialize objects to the obj with a key"""
@@ -38,9 +44,12 @@ class FileStorage:
 
     def reload(self):
         """will reload server data"""
-        if path.isfile(self.__file_path):
+        try:
             with open(self.__file_path, 'r', encoding="UTF8") as f:
-                dictionary = json.load(f)
-            for key, value in dictionary.items():
-                name = value['__class__']
-                self.new(eval(name)(**value))
+                obj_dict = json.loads(f.read())
+                for key, value in obj_dict.items():
+                    self.__objects[key] = eval(value['__class__'])(**value)
+        except FileNotFoundError:
+            pass
+        except json.decoder.JSONDecodeError:
+            pass

@@ -9,7 +9,3 @@ from models.base_model import BaseModel
 class Amenity(BaseModel):
     """inherited class for amenities"""
     name = ""
-
-    def __init__(self):
-        """initalizing for future updates"""
-        pass
