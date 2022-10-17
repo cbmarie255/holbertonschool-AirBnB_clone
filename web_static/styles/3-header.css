@@ -3,11 +3,13 @@ header {
     height:70px;
     width:100%;
     border-bottom:1px solid #CCCCCC;
+    display: flex;
+    align-items: center;
 }
 header .logo {
-    background-image:url("../images/logo.png") no-repeat;
-    height:100%;
-    top:7%;
-    position:relative;
-    left:20px;
+    background-image: url("../images/logo.png");
+    width: 142px;
+    left: 20px;
+    position: absolute;
+    height: 60px;
 }
